@@ -1,0 +1,49 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: radio program API 
+servers:
+  - url: http://localhost:8080/api/
+paths:
+  /list:
+    get:
+      summary: 未聴取の番組リストを取得します
+      responses:
+        '200':
+          description: 未聴取の番組リスト
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/program"
+
+  /program:
+    put:
+      summary: 番組を聴取済みに更新します
+      parameters:
+        - name: programId
+          in: query
+          description: 番組IDを指定します
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 更新が成功しました
+
+components:
+  schemas:
+    program:
+      required:
+        - id
+        - title
+        - detail
+        - utl
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        url:
+          type: string
